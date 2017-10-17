@@ -3,7 +3,7 @@ docker-backup
 Fork from: https://github.com/boombatower/docker-backup
 
 My approach is to create a light image using *Alpine*.
-Respecting the original documentation but skipping S3 option.
+Respecting the original documentation but skipping S3 option, the following:
 
 Simple utility for backing up a Docker data container.
 
@@ -102,5 +102,4 @@ backup service are provided in [doc directory](doc).
 docker registry
 ---------------
 The Docker registry repositories can be found at:
-- https://registry.hub.docker.com/u/boombatower/docker-backup
-- https://registry.hub.docker.com/u/boombatower/docker-backup-s3
+- https://registry.hub.docker.com/u/piscue/docker-backup
