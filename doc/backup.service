@@ -8,7 +8,6 @@ After=docker.service
 Type=oneshot
 ExecStart=/usr/bin/docker run --rm \
   --volumes-from data-container \
-  -e ACCESS_KEY="..." \
-  -e SECRET_KEY="..." \
-  -e BUCKET="s3://[BUCKET]/" \
-  boombatower/docker-backup-s3 backup data-container.tar.xz
+  -v $(pwd):/backup \
+  -e TAR_OPTS="--verbose" \
+  piscue/docker-backup backup "$(date +%F_%R).tar.xz"

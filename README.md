@@ -1,6 +1,11 @@
 docker-backup
 =============
-Simple utility for backing up a Docker data container (optionally to s3).
+Fork from: https://github.com/boombatower/docker-backup
+
+My approach is to create a light image using *Alpine*.
+Respecting the original documentation but skipping S3 option.
+
+Simple utility for backing up a Docker data container.
 
 other solutions
 ---------------
@@ -61,7 +66,7 @@ To dump backup archive from `data-container` into current directory:
 $ docker run --rm \
   --volumes-from data-container \
   -v $(pwd):/backup \
-  boombatower/docker-backup backup
+  piscue/docker-backup backup
 ```
 
 To restore:
@@ -69,7 +74,7 @@ To restore:
 $ docker run --rm \
   --volumes-from data-container \
   -v $(pwd):/backup \
-  boombatower/docker-backup restore
+  piscue/docker-backup restore
 ```
 
 To use a date based file name and add `--verbose` flag to tar command:
@@ -78,7 +83,7 @@ $ docker run --rm \
   --volumes-from data-container \
   -v $(pwd):/backup \
   -e TAR_OPTS="--verbose" \
-  boombatower/docker-backup backup "$(date +%F_%R).tar.xz"
+  piscue/docker-backup backup "$(date +%F_%R).tar.xz"
 ```
 
 One interesting option would be to remove the `--rm` flag a simply let the
@@ -87,40 +92,6 @@ Using other tools the containers could be perged at desired intervals. Since
 this image exposes `/backup` as a volume the backup container could be accessed
 via `--volumes-from` for the restore script.
 
-Any existing container or tools designed to work with a tarball can be compiled
-into a Docker container that builds on the basic tool as the s3 tool included
-in this repository.
-
-```
-s3.sh backup|restore [filename]
-- filename: backup.tar.xz
-Environment variables:
-- required: ACCESS_KEY, SECRET_KEY, and BUCKET
-- optional: S3CMD_OPTS
-```
-
-To upload backup directly to s3:
-```sh
-$ docker run --rm \
-  --volumes-from data-container \
-  -e ACCESS_KEY="..." \
-  -e SECRET_KEY="..." \
-  -e BUCKET="s3://[BUCKET]/" \
-  boombatower/docker-backup-s3 backup data-container.tar.xz
-```
-
-Used in combination with a versioned s3 bucket and even glacier this static
-file name is still quite powerful.
-
-To restore backup directly from s3:
-```sh
-$ docker run --rm \
-  --volumes-from data-container \
-  -e ACCESS_KEY="..." \
-  -e SECRET_KEY="..." \
-  -e BUCKET="s3://[BUCKET]/" \
-  boombatower/docker-backup-s3 restore data-container.tar.xz
-```
 
 systemd scheduling
 ------------------

@@ -1,14 +1,18 @@
 # http://docs.docker.com/reference/builder
-# docker backup image (boombatower/docker-backup).
+# docker backup image (piscue/docker-backup).
 
-FROM boombatower/opensuse
-MAINTAINER Jimmy Berry <jimmy@boombatower.com>
+FROM alpine
+MAINTAINER piscue <piscue@gmail.com>
 
-RUN zypper refresh && \
-    zypper -n in --no-recommends tar xz
+RUN apk --no-cache add \
+    tar \
+    xz \
+    bash \
+    grep
 
-ADD backup.sh /root/bin/
+ADD backup.sh /root/
 
 VOLUME /backup
-ENTRYPOINT ["/root/bin/backup.sh"]
+ENTRYPOINT ["/root/backup.sh"]
+#ENTRYPOINT ["bash"]
 CMD ["backup"]
