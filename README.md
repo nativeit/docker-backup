@@ -3,7 +3,7 @@ docker-backup
 Fork from: https://github.com/boombatower/docker-backup
 
 My approach is to create a light image using *Alpine*.
-Respecting the original documentation but skipping S3 option, the following:
+Respecting the original documentation but skipping S3 option:
 
 Simple utility for backing up a Docker data container.
 

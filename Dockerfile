@@ -1,4 +1,3 @@
-# http://docs.docker.com/reference/builder
 # docker backup image (piscue/docker-backup).
 
 FROM alpine
@@ -14,5 +13,4 @@ ADD backup.sh /root/
 
 VOLUME /backup
 ENTRYPOINT ["/root/backup.sh"]
-#ENTRYPOINT ["bash"]
 CMD ["backup"]
