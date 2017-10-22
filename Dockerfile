@@ -1,7 +1,7 @@
 # docker backup image (piscue/docker-backup).
 
 FROM alpine
-MAINTAINER piscue <piscue@gmail.com>
+MAINTAINER piscue <piscue+github@gmail.com>
 
 RUN apk --no-cache add \
     tar \
