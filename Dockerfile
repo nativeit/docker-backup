@@ -1,7 +1,7 @@
-# docker backup image (piscue/docker-backup).
+# docker backup image (native/docker-backup).
 
 FROM alpine
-MAINTAINER piscue <piscue+github@gmail.com>
+MAINTAINER nativeit <dev@nativeit.net>
 
 RUN apk --no-cache add \
     tar \
